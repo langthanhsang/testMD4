@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style th:replace="/layout :: css"></style>
+</head>
+<body>
+<h1>Student Detail</h1>
+<h2>Name: <span th:text="${city.getName()}"></span></h2>
+<h2>Area: <span th:text="${city.getArea()}"></span></h2>
+<h2>Population: <span th:text="${city.getPopulation()}"></span></h2>
+<h2>Gdp: <span th:text="${city.getGdp()}"></span></h2>
+<h2>Description: <span th:text="${city.getDescription()}"></span></h2>
+<h2>Country: <span th:text="${city.getCountry().getName()}"></span></h2>
+<a th:href="@{/city/list}">Back to home</a>
+<br>
+<a th:href="@{/city/edit/{id}(id=${city.getId()})}">Edit</a><br>
+<td><a th:href="@{/city/delete/{id}(id=${city.getId()})}"
+       onclick="return confirm('Are you sure you want to Delete?')">Delete</a></td>
+<footer th:replace="/layout::footer"></footer>
+</body>
+</html>

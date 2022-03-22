@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style th:replace="/layout :: css"></style>
+</head>
+<body>
+<h1>List city in class</h1>
+
+<table id="products">
+  <tr>
+    <th>Name</th>
+    <th>Area</th>
+    <th>population</th>
+    <th>Gdp</th>
+    <th>description</th>
+    <th>Edit</th>
+    <th>Delete</th>
+    <th>View</th>
+  </tr>
+  <tr th:each="c : ${cities}">
+    <td th:text="${c.getName()}"></td>
+    <td th:text="${c.getArea()}"></td>
+    <td th:text="${c.population}"></td>
+    <td th:text="${c.getGdp()}"></td>
+    <td th:text="${c.getDescription()}"></td>
+    <td><a th:href="@{/city/edit/{id}(id=${c.getId()})}">Edit</a></td>
+    <td><a th:href="@{/city/delete/{id}(id=${c.getId()})}"
+           onclick="return confirm('Are you sure you want to Delete?')">Delete</a></td>
+    <td><a th:href="@{/city/view/{id}(id=${c.getId()})}">View</a></td>
+  </tr>
+</table>
+<br>
+<div>
+  <a th:href="@{/country/country-in(page=${cities.number - 1},countr_id=${country_id})}"
+     th:if="${cities.hasPrevious()}"><span>Previous</span></a>
+  <span th:text="${cities.number + 1} + '/' + ${cities.totalPages}"></span>
+  <a th:href="@{/classroom/country-in(page=${cities.number + 1},country_id=${country_id})}"
+     th:if="${cities.hasNext()}"><span>Next</span></a>
+</div>
+<a th:href="@{/city}">Back to home</a>
+<footer th:replace="/layout::footer"></footer>
+</body>
+</html>
